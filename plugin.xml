@@ -21,7 +21,6 @@
         <config-file target="config.xml" parent="/*">
             <feature name="LowLatencyAudio">
                 <param name="ios-package" value="LowLatencyAudio"/>
-                <param name="onload" value="true"/>
             </feature>
         </config-file>
 

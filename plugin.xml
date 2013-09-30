@@ -4,7 +4,7 @@
            id="com.adobe.plugins.LowLatencyAudio"
       version="3.0.0">
     <name>LowLatencyAudio</name>
-    <description>TThe low latency audio plugin is designed to enable low latency and polyphonic audio from PhoneGap applications, using a very simple and basic API.</description>
+    <description>The low latency audio plugin is designed to enable low latency and polyphonic audio from PhoneGap applications, using a very simple and basic API.</description>
     <license>MIT</license>
     <keywords>cordova,audio,low,latency,music,sound,polyphonic</keywords>
     

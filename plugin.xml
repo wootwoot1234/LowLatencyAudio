@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="com.adobe.plugins.LowLatencyAudio"
+      version="3.0.0">
+    <name>LowLatencyAudio</name>
+    <description>TThe low latency audio plugin is designed to enable low latency and polyphonic audio from PhoneGap applications, using a very simple and basic API.</description>
+    <license>MIT</license>
+    <keywords>cordova,audio,low,latency,music,sound,polyphonic</keywords>
+    
+    <js-module src="www/LowLatencyAudio.js" name="LowLatencyAudio">
+        <clobbers target="plugins.LowLatencyAudio" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="LowLatencyAudio">
+                <param name="ios-package" value="LowLatencyAudio"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/LowLatencyAudio.m" />
+        <source-file src="src/ios/LowLatencyAudioAsset.m" />
+        
+        <header-file src="src/ios/LowLatencyAudio.h" />
+        <header-file src="src/ios/LowLatencyAudioAsset.h" />
+    </platform>
+    
+</plugin>

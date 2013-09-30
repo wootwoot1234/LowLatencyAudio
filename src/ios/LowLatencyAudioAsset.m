@@ -2,6 +2,8 @@
 //  PGAudioAsset.m
 //  PGAudio
 //
+//  Updated by Tom Krones on 9/30/13.
+//  Updated by Julien Barbay on 8/28/13.
 //  Created by Andrew Trice on 1/23/12.
 //
 // THIS SOFTWARE IS PROVIDED BY ANDREW TRICE "AS IS" AND ANY EXPRESS OR
@@ -67,11 +69,9 @@
 
 - (void) loop
 {
-    [self stop];
     AVAudioPlayer * player = [voices objectAtIndex:playIndex];
     [player setCurrentTime:0.0];
     player.numberOfLoops = -1;
-    player.volume = 0.25;
     [player play];
     playIndex += 1;
     playIndex = playIndex % [voices count];
@@ -88,4 +88,9 @@
     [voices release];
 }
 
+- (void) setVolume: (float) value
+{
+    AVAudioPlayer * player = [voices objectAtIndex:playIndex];
+    [player setVolume:value];
+}
 @end

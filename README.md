@@ -1,6 +1,7 @@
 LowLatencyAudio
 ===============
 LowLatencyAudio plugin for PhoneGap/Apache Cordova
+
 Updated by Tom Krones on 9/30/13
 Updated by Julien Barbay on 8/28/13
 Developed by Andrew Trice - http://tricedesigns.com
@@ -18,16 +19,19 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 You can read more about this plugin at:
 http://www.tricedesigns.com/2012/01/25/low-latency-polyphonic-audio-in-phonegap/
+You can read more about the volume addition here:
+https://github.com/phonegap/phonegap-plugins/pull/1248
+This code was forked from here with the above volume additions.
+https://github.com/phonegap/phonegap-plugins
+
+## Description
 
 The low latency audio plugin is designed to enable low latency and polyphonic audio from PhoneGap applications, using a very simple and basic API.
-
 
 ## Installation
 
 1. Using Phonegap CLI, in terminal navigate to your projects root directory.
 2. run `phonegap local plugin add https://github.com/wootwoot1234/LowLatencyAudio.git`
-
-Note: If you are using automated reference counting (ARC), you may need to remove retain/release statements.
 
 ## Usage
 

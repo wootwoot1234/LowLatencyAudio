@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-           id="com.adobe.plugins.LowLatencyAudio"
+           id="LowLatencyAudio"
       version="3.0.0">
     <name>LowLatencyAudio</name>
     <description>The low latency audio plugin is designed to enable low latency and polyphonic audio from PhoneGap applications, using a very simple and basic API.</description>

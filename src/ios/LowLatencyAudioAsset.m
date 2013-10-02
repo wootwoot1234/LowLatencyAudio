@@ -29,8 +29,7 @@
     self = [super init];
     if(self) 
     {
-        voices = [[NSMutableArray alloc] init];  
-        [voices retain];
+        voices = [[NSMutableArray alloc] init];
         
         NSURL *pathURL = [NSURL fileURLWithPath : path];
         
@@ -38,7 +37,6 @@
         {
             AVAudioPlayer *player;
             player = [[AVAudioPlayer alloc] initWithContentsOfURL:pathURL error: NULL];
-            [player retain];
             [player prepareToPlay];   
             [voices addObject:player];
         }
@@ -80,12 +78,10 @@
 - (void) unload 
 {
     [self stop];
-    for (int x = 0; x < [voices count]; x++) 
-    {
-        AVAudioPlayer * player = [voices objectAtIndex:x];
-        [player release];
-    }
-    [voices release];
+//    for (int x = 0; x < [voices count]; x++) 
+//    {
+//        AVAudioPlayer * player = [voices objectAtIndex:x];
+//    }
 }
 
 - (void) setVolume: (float) value

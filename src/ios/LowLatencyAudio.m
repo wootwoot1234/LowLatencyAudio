@@ -48,14 +48,11 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
 {
     
     CDVPluginResult* pluginResult;
-    NSString* callbackID = command.callbackId;
-    [callbackID retain];
+    //NSString* callbackID = command.callbackId;
     
-    NSString *audioID = [command.arguments objectAtIndex:0]; 
-    [audioID retain];
+    NSString *audioID = [command.arguments objectAtIndex:0];
     
-    NSString *assetPath = [command.arguments objectAtIndex:1]; 
-    [assetPath retain]; 
+    NSString *assetPath = [command.arguments objectAtIndex:1];
     
     NSLog(@"[LowLatencyPlugin] preloadFX");
     NSLog(@"[LowLatencyPlugin] audioID   %@", audioID);
@@ -64,17 +61,14 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
     if(audioMapping == nil)
     {
         audioMapping = [NSMutableDictionary dictionary];
-        [audioMapping retain];    
     }
     
     NSNumber* existingReference = [audioMapping objectForKey: audioID];
     if (existingReference == nil)
     {
         NSString* basePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"www"];
-        [basePath retain];
         
         NSString* path = [NSString stringWithFormat:@"%@/%@", basePath, assetPath];
-        [path retain];
 
         NSLog(@"[LowLatencyPlugin] computed path %@", path);
         
@@ -82,7 +76,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
         {
             NSURL *pathURL = [NSURL fileURLWithPath : path];
             SystemSoundID soundID;
-            AudioServicesCreateSystemSoundID((CFURLRef) pathURL, & soundID);
+            AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain(pathURL), & soundID);
             [audioMapping setObject:[NSNumber numberWithInt:soundID]  forKey: audioID];
             
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: CONTENT_LOAD_REQUESTED];
@@ -90,32 +84,22 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
         else { pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: ERROR_NOT_FOUND]; }
         
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-        
-        [basePath release];
-        [path release];
     }
     else 
     {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: WARN_EXISTING_REFERENCE];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-    
-    [callbackID release];
-    [audioID release];
-    [assetPath release];
 }
 
 - (void) preloadAudio:(CDVInvokedUrlCommand*)command
 {   
     CDVPluginResult* pluginResult;
-    NSString* callbackID = command.callbackId;
-    [callbackID retain];
+    //NSString* callbackID = command.callbackId;
     
-    NSString *audioID = [command.arguments objectAtIndex:0]; 
-    [audioID retain];
+    NSString *audioID = [command.arguments objectAtIndex:0];
     
-    NSString *assetPath = [command.arguments objectAtIndex:1]; 
-    [assetPath retain]; 
+    NSString *assetPath = [command.arguments objectAtIndex:1];
     
     NSLog(@"[LowLatencyPlugin] preloadAudio");
     NSLog(@"[LowLatencyPlugin] audioID   %@", audioID);
@@ -130,29 +114,24 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
     {
         voices = [NSNumber numberWithInt:1];
     }
-    [voices retain];
     
     if(audioMapping == nil)
     {
         audioMapping = [NSMutableDictionary dictionary];
-        [audioMapping retain];    
     }
     
     NSNumber* existingReference = [audioMapping objectForKey: audioID];
     if (existingReference == nil)
     {
         NSString* basePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"www"];
-        [basePath retain];
         
         NSString* path = [NSString stringWithFormat:@"%@/%@", basePath, assetPath];
-        [path retain];
 
         NSLog(@"[LowLatencyPlugin] computed path %@", path);
         
         if ([[NSFileManager defaultManager] fileExistsAtPath : path])
         {
             LowLatencyAudioAsset* asset = [[LowLatencyAudioAsset alloc] initWithPath:path withVoices:voices];
-            [asset retain];
             [audioMapping setObject:asset  forKey: audioID];
             
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: CONTENT_LOAD_REQUESTED];
@@ -165,9 +144,7 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
             
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         }
-        
-        [basePath release];
-        [path release];
+   
     }
     else 
     {
@@ -175,21 +152,14 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
         
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-    
-    [callbackID release];
-    [audioID release];
-    [assetPath release];
-    [voices release];
 }
 
 - (void) play:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult;
-    NSString* callbackID = command.callbackId;
-    [callbackID retain];
+    //NSString* callbackID = command.callbackId;
     
     NSString *audioID = [command.arguments objectAtIndex:0]; 
-    [audioID retain];
     
     NSLog(@"[LowLatencyPlugin] play");
     NSLog(@"[LowLatencyPlugin] audioID   %@", audioID);
@@ -218,19 +188,14 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
         
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-    
-    [callbackID release];
-    [audioID release];
 }
 
 - (void) stop:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult;
-    NSString* callbackID = command.callbackId;
-    [callbackID retain];
+    //NSString* callbackID = command.callbackId;
     
     NSString *audioID = [command.arguments objectAtIndex:0]; 
-    [audioID retain];
 
     NSLog(@"[LowLatencyPlugin] stop");
     NSLog(@"[LowLatencyPlugin] audioID   %@", audioID);
@@ -261,19 +226,14 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
         
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-    
-    [callbackID release];
-    [audioID release];
 }
 
 - (void) loop:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult;
-    NSString* callbackID = command.callbackId;
-    [callbackID retain];
+    //NSString* callbackID = command.callbackId;
     
     NSString *audioID = [command.arguments objectAtIndex:0]; 
-    [audioID retain];
 
     NSLog(@"[LowLatencyPlugin] loop");
     NSLog(@"[LowLatencyPlugin] audioID   %@", audioID);
@@ -303,19 +263,14 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
         
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-    
-    [callbackID release];
-    [audioID release];
 }
 
 - (void) unload:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult;
     NSString* callbackID = command.callbackId;
-    [callbackID retain];
     
     NSString *audioID = [command.arguments objectAtIndex:0]; 
-    [audioID retain];
     
     NSLog(@"[LowLatencyPlugin] unload");
     NSLog(@"[LowLatencyPlugin] audioID   %@", audioID);
@@ -345,19 +300,14 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
         
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-    
-    [callbackID release];
-    [audioID release];
 }
 
 - (void) setVolume:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult;
     NSString* callbackID = command.callbackId;
-    [callbackID retain];
     
     NSString *audioID = [command.arguments objectAtIndex:0];
-    [audioID retain];
     
     float volumeValue = [[command.arguments objectAtIndex:1] floatValue];
     
@@ -385,9 +335,6 @@ NSString* RESTRICTED = @"ACTION RESTRICTED FOR FX AUDIO";
         
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
-    
-    [callbackID release];
-    [audioID release];
 }
 
 @end
